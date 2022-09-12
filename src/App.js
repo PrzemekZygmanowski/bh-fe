@@ -1,9 +1,33 @@
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { UserForm } from './pages/UserForm';
+import { Users } from './pages/Users';
+
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        users: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache,
+});
 
 function App() {
   return (
     <>
-      <UserForm></UserForm>
+      <ApolloProvider client={client}>
+        <UserForm></UserForm>
+        <Users></Users>
+      </ApolloProvider>
     </>
   );
 }
