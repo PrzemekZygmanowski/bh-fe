@@ -8,9 +8,6 @@ import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../graphql/ADD_USER';
-import { GET_USERS } from '../graphql/GET_USERS';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -27,24 +24,12 @@ const validationSchema = yup.object({
   // .min(Date.now(), 'Start Date must be later than today'),
 });
 
-export const AddUserForm = () => {
-  const [addUser] = useMutation(ADD_USER, {
-    update(cache, { data: { addUser } }) {
-      const { users } = cache.readQuery({ query: GET_USERS });
-      cache.writeQuery({
-        query: GET_USERS,
-        data: {
-          users: users.concat([addUser]),
-        },
-      });
-    },
-  });
-
+export const AddUserForm = ({ addUser }) => {
   const formik = useFormik({
     initialValues: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'foobar@example.com',
+      firstName: '',
+      lastName: '',
+      email: '',
       date: dayjs(Date.now()),
     },
     validationSchema: validationSchema,
@@ -54,7 +39,7 @@ export const AddUserForm = () => {
   });
 
   return (
-    <div>
+    <>
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={3}>
           <TextField
@@ -110,6 +95,6 @@ export const AddUserForm = () => {
           </Button>
         </Stack>
       </form>
-    </div>
+    </>
   );
 };

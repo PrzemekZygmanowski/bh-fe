@@ -1,6 +1,6 @@
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { UserForm } from './pages/UserForm';
-import { Users } from './pages/Users';
+import { UserForm } from './containers/UserForm';
+import { Users } from './containers/Users';
 
 const cache = new InMemoryCache({
   typePolicies: {

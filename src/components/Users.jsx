@@ -1,26 +1,9 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { useQuery } from '@apollo/client';
-import { Loader } from './Loader';
 import { Button } from '@mui/material';
-import { useMutation } from '@apollo/client';
-import { GET_USERS } from '../graphql/GET_USERS';
-import { DELETE_USER } from '../graphql/DELETE_USER';
+import { Loader } from './Loader';
 
-export const Users = () => {
-  const { loading, error, data } = useQuery(GET_USERS);
-  const [deleteUser] = useMutation(DELETE_USER, {
-    update(cache, { data: { deleteUser } }) {
-      const { users } = cache.readQuery({ query: GET_USERS });
-      cache.writeQuery({
-        query: GET_USERS,
-        data: {
-          users: users.filter((user) => user.id !== deleteUser.id),
-        },
-      });
-    },
-  });
-
+export const Users = ({ users, loading, error, deleteUser }) => {
   if (loading) return <Loader></Loader>;
   if (error) return <p>Something went wrong</p>;
 
@@ -36,7 +19,11 @@ export const Users = () => {
         const handleDelete = () => {
           deleteUser({ variables: { id: cellValues.id } });
         };
-        return <Button onClick={handleDelete}>DELETE</Button>;
+        return (
+          <Button variant="contained" onClick={handleDelete}>
+            DELETE
+          </Button>
+        );
       },
       width: 250,
     },
@@ -47,7 +34,7 @@ export const Users = () => {
       {!loading && !error && (
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
-            rows={data.users}
+            rows={users}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
