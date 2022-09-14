@@ -39,7 +39,7 @@ export const AddUserForm = ({ addUser }) => {
   });
 
   return (
-    <>
+    <div data-testid="addUserForm">
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={3}>
           <TextField
@@ -95,6 +95,6 @@ export const AddUserForm = ({ addUser }) => {
           </Button>
         </Stack>
       </form>
-    </>
+    </div>
   );
 };

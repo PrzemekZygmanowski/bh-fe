@@ -16,5 +16,5 @@ export const UserForm = () => {
       });
     },
   });
-  return <AddUserForm addUser={addUser}></AddUserForm>;
+  return <AddUserForm addUser={addUser} />;
 };

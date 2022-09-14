@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { Loader } from './Loader';
 
 export const Users = ({ users, loading, error, deleteUser }) => {
-  if (loading) return <Loader></Loader>;
+  if (loading) return <Loader />;
   if (error) return <p>Something went wrong</p>;
 
   const columns = [
@@ -39,6 +39,7 @@ export const Users = ({ users, loading, error, deleteUser }) => {
             pageSize={5}
             rowsPerPageOptions={[5]}
           />
+          <Loader />
         </div>
       )}
     </>

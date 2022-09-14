@@ -25,8 +25,8 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <UserForm></UserForm>
-        <Users></Users>
+        <UserForm />
+        <Users />
       </ApolloProvider>
     </>
   );

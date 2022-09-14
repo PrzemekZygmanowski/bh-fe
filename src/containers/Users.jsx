@@ -25,6 +25,6 @@ export const Users = () => {
       error={error}
       loading={loading}
       deleteUser={deleteUser}
-    ></UsersComponent>
+    />
   );
 };
