@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -20,8 +19,10 @@ const validationSchema = yup.object({
     .string('Enter your email')
     .email('Enter a valid email')
     .required('Email is required'),
-  date: yup.string('Enter your date').required('Date is required'),
-  // .min(Date.now(), 'Start Date must be later than today'),
+  date: yup
+    .date('Enter your date')
+    .required('Date is required')
+    .min(new Date(), 'Date must be later than today'),
 });
 
 export const AddUserForm = ({ addUser }) => {
@@ -30,7 +31,7 @@ export const AddUserForm = ({ addUser }) => {
       firstName: '',
       lastName: '',
       email: '',
-      date: dayjs(Date.now()),
+      date: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -75,14 +76,17 @@ export const AddUserForm = ({ addUser }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
               disablePast
+              id="date"
+              name="date"
               label="Pick Your date"
               inputFormat="MM/DD/YYYY"
               value={formik.values.date}
               onChange={(val) => {
-                formik.setFieldValue('date', val);
+                val && formik.setFieldValue('date', val.format('MM/DD/YYYY'));
               }}
               renderInput={(params) => (
                 <TextField
+                  name="date"
                   error={formik.touched.date && Boolean(formik.errors.date)}
                   helperText={formik.touched.date && formik.errors.date}
                   {...params}

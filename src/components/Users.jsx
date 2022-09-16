@@ -39,7 +39,6 @@ export const Users = ({ users, loading, error, deleteUser }) => {
             pageSize={5}
             rowsPerPageOptions={[5]}
           />
-          <Loader />
         </div>
       )}
     </>
