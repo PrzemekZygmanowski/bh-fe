@@ -18,6 +18,8 @@ by cloning it from the https://github.com/PrzemekZygmanowski/bh-be repository an
 
 In the project directory, you can run:
 
+### `install dependencies - yarn`
+
 ### `start project - yarn start`
 
 Runs the app in the development mode.\
@@ -30,3 +32,7 @@ You may also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+## `Contact`
+
+p.zygmanowski@o2.pl
