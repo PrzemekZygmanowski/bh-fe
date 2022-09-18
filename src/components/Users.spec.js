@@ -1,10 +1,4 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  within,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Users } from './Users';
 
 const users = [
@@ -100,24 +94,4 @@ describe('Render Component with mocked data', () => {
     expect(secondRow).toBeInTheDocument();
     expect(thirdRow).toBeInTheDocument();
   });
-  //   test('test delete row functionality', async () => {
-  //     renderWithData();
-  //     const row = await waitFor(() =>
-  //       screen.findAllByRole('row', {
-  //         name: /jon snow jon@snow\.north/i,
-  //       })
-  //     );
-  //     console.log(row);
-  //     fireEvent.click(within(row).getByRole('button', { name: /delete/i }));
-  //     await waitFor(() => {
-  //       expect(row).not.toBeInTheDocument();
-  //     });
-  //   });
-
-  //   //     const row = screen.getByRole('row', {  name: /jon snow jon@snow\.north 2022\-09\-14t18:56:47\.165z delete/i});within(row).getByRole('button', {  name: /delete/i});
-  //   //     const firstRow = await waitFor(() =>
-  //   //     screen.findByRole('row', {
-  //   //       name: /jon snow jon@snow\.north 2022\-09\-14t18:56:47\.165z delete/i,
-  //   //     })
-  //   //   );
 });
